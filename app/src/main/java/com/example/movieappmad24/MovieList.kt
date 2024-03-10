@@ -1,0 +1,19 @@
+package com.example.movieappmad24
+
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.example.movieappmad24.models.Movie
+import com.example.movieappmad24.models.getMovies
+
+@Composable
+fun MovieList(list: List<Movie> = getMovies(), padding: PaddingValues) {
+    LazyColumn (modifier = Modifier.padding(padding)){
+        items(list) { movie ->
+            MovieCard(movie = movie)
+        }
+    }
+}
