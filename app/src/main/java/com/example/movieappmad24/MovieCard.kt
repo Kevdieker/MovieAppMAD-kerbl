@@ -1,5 +1,10 @@
 package com.example.movieappmad24
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,43 +18,45 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.movieappmad24.models.Movie
 
 @Composable
 fun MovieCard(
-    movie: Movie = Movie(
-        id = "tt0903747",
-        title = "Breaking Bad",
-        year = "2008–2013",
-        genre = "Crime, Drama, Thriller",
-        director = "N/A",
-        actors = "Bryan Cranston, Anna Gunn, Aaron Paul, Dean Norris",
-        plot = "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's financial future.",
-        images = listOf(
-            "https://images-na.ssl-images-amazon.com/images/M/MV5BMTgyMzI5NDc5Nl5BMl5BanBnXkFtZTgwMjM0MTI2MDE@._V1_SY1000_CR0,0,1498,1000_AL_.jpg",
-            "https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ2NDkwNDk5NV5BMl5BanBnXkFtZTgwNDM0MTI2MDE@._V1_SY1000_CR0,0,1495,1000_AL_.jpg",
-            "https://images-na.ssl-images-amazon.com/images/M/MV5BMTM4NDcyNDMzMF5BMl5BanBnXkFtZTgwOTI0MTI2MDE@._V1_SY1000_CR0,0,1495,1000_AL_.jpg",
-            "https://images-na.ssl-images-amazon.com/images/M/MV5BMTAzMTczMjM3NjFeQTJeQWpwZ15BbWU4MDc1MTI1MzAx._V1_SY1000_CR0,0,1495,1000_AL_.jpg",
-            "https://images-na.ssl-images-amazon.com/images/M/MV5BMjA5MTE3MTgwMF5BMl5BanBnXkFtZTgwOTQxMjUzMDE@._V1_SX1500_CR0,0,1500,999_AL_.jpg"
-        ),
-        trailer = "trailer_placeholder",
-        rating = "9.5"
-    )
+    movie: Movie
 ) {
+    var expandedState by remember { mutableStateOf(false) }
+    val rotationState by animateFloatAsState(
+        targetValue = if (expandedState) 180f else 0f, label = ""
+    )
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(5.dp),
+            .padding(5.dp)
+            .animateContentSize(
+                animationSpec = tween(
+                    durationMillis = 300,
+                    easing = LinearOutSlowInEasing
+                )
+            ),
         shape = ShapeDefaults.Large,
         elevation = CardDefaults.cardElevation(10.dp)
     ) {
@@ -65,13 +72,13 @@ fun MovieCard(
                     modifier = Modifier
                         .fillMaxSize(),
                     contentScale = ContentScale.Crop,
-                    contentDescription = "image",
-                    )
+                    contentDescription = "Movie image",
+                )
                 Icon(
                     modifier = Modifier
                         .padding(12.dp)
                         .align(Alignment.TopEnd),
-                    tint = Color.LightGray,
+                    tint = Color.White,
                     imageVector = Icons.Default.Favorite,
                     contentDescription = "heart"
                 )
@@ -84,12 +91,44 @@ fun MovieCard(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = movie.title
+                    text = movie.title,
+                    fontSize = 18.sp,
                 )
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowUp,
-                    contentDescription = "icon"
-                )
+
+                IconButton(
+                    modifier = Modifier
+                        .rotate(rotationState),
+                    onClick = {
+                        expandedState = !expandedState
+                    }) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowUp,
+                        contentDescription = "Drop-Down Arrow"
+                    )
+                }
+            }
+            if (expandedState) {
+                Column(
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Director: ${movie.director}\n" +
+                                "Released: ${movie.year}\n" +
+                                "Genre: ${movie.genre}\n" +
+                                "Actors: ${movie.actors}\n" +
+                                "Rating: ${movie.rating}"
+                    )
+                    Divider(
+                        thickness = 4.dp,
+                        modifier = Modifier.padding(vertical = 4.dp)
+                    )
+                    Text(
+                        text = "Plot: ${movie.plot}\n"
+                    )
+                }
             }
         }
     }
