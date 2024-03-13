@@ -11,15 +11,17 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.movieappmad24.models.getMovies
 
 
 @Composable
-fun MovieAppScaffold() {
+fun MovieAppScaffold(navController: NavController) {
     Scaffold(
         topBar = { MovieAppTopBar() },
         bottomBar = { MovieAppBotBar() }
-    ) { innerPadding -> MovieList(getMovies(), innerPadding) }
+    ) { innerPadding -> MovieList(navController = navController,list=getMovies(), padding=innerPadding) }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

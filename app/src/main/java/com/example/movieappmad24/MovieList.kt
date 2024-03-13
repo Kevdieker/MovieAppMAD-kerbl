@@ -6,14 +6,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import com.example.movieappmad24.models.Movie
 import com.example.movieappmad24.models.getMovies
 
 @Composable
-fun MovieList(list: List<Movie> = getMovies(), padding: PaddingValues) {
+fun MovieList(navController: NavController, list: List<Movie> = getMovies(), padding: PaddingValues) {
     LazyColumn (modifier = Modifier.padding(padding)){
         items(list) { movie ->
-            MovieCard(movie = movie)
+            MovieCard(movie = movie){movieId ->
+                navController.navigate(route = "detailscreen/$movieId")
+            }
         }
     }
 }

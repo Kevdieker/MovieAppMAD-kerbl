@@ -40,7 +40,8 @@ import com.example.movieappmad24.models.Movie
 
 @Composable
 fun MovieCard(
-    movie: Movie
+    movie: Movie,
+    onItemClick:(String) -> Unit = {}
 ) {
     var expandedState by remember { mutableStateOf(false) }
     val rotationState by animateFloatAsState(
@@ -51,6 +52,7 @@ fun MovieCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp)
+            .clickable { onItemClick(movie.id)  }
             .animateContentSize(
                 animationSpec = tween(
                     durationMillis = 300,
