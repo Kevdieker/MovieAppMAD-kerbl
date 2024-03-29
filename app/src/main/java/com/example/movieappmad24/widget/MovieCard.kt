@@ -1,4 +1,4 @@
-package com.example.movieappmad24
+package com.example.movieappmad24.widget
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing

@@ -1,4 +1,4 @@
-package com.example.movieappmad24
+package com.example.movieappmad24.widget
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -12,10 +12,17 @@ import com.example.movieappmad24.models.getMovies
 import com.example.movieappmad24.navigation.Screen
 
 @Composable
-fun MovieList(navController: NavController, list: List<Movie> = getMovies(), padding: PaddingValues) {
-    LazyColumn (modifier = Modifier.padding(padding)){
-        items(list) { movie ->
-            MovieCard(movie = movie){movieId ->
+fun MovieList(
+    navController: NavController,
+    list: List<Movie> = getMovies(),
+    padding: PaddingValues,
+    showOnlyFirstThree: Boolean = false
+) {
+    val displayList = if (showOnlyFirstThree) list.take(3) else list
+
+    LazyColumn(modifier = Modifier.padding(padding)) {
+        items(displayList) { movie ->
+            MovieCard(movie = movie) { movieId ->
                 navController.navigate(route = Screen.Detail.route.replace("{movieId}", movieId))
             }
         }

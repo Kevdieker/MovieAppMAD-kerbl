@@ -1,4 +1,4 @@
-package com.example.movieappmad24
+package com.example.movieappmad24.widget
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.OutlinedTextField
