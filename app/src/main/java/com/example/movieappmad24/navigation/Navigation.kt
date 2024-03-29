@@ -15,13 +15,13 @@ fun Navigation() {
 
     NavHost(
         navController = navController,
-        startDestination = "home-screen"
+        startDestination = Screen.Home.route
     ) {
-        composable(route = "home-screen") {
+        composable(route = Screen.Home.route) {
             HomeScreen(navController = navController)
         }
 
-        composable(route = "detailscreen/{movieId}", arguments = listOf(navArgument(name = "movieId"){type = NavType.StringType}))
+        composable(route = Screen.Detail.route, arguments = listOf(navArgument(name = "movieId"){type = NavType.StringType}))
         {backStackEntry ->
             DetailScreen(navController = navController,movieId = backStackEntry.arguments?.getString("movieId")
             )
