@@ -18,6 +18,6 @@ fun WatchlistScreen(navController: NavController,moviesViewModel: MoviesViewMode
                 onNavigationIconClick = null
             ) },
             bottomBar = { SimpleBottomAppBar(navController) }
-        ) { innerPadding ->    MovieList(navController = navController, padding =innerPadding, showOnlyFirstThree = true ) }
+        ) { innerPadding ->    MovieList(navController = navController,moviesViewModel.favoriteMovies, padding =innerPadding) }
     }
 }

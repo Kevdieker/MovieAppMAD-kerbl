@@ -21,7 +21,7 @@ import com.example.movieappmad24.widget.SimpleTopAppBar
 
 @Composable
 fun DetailScreen(navController: NavController, movieId: String?,moviesViewModel: MoviesViewModel) {
-    val movie = getMovies().find { it.id == movieId }
+    val movie = moviesViewModel.movies.find { it.id == movieId }
     Scaffold(
         topBar = {
             SimpleTopAppBar(

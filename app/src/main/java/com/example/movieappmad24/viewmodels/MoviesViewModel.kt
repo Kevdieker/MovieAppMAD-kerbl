@@ -16,4 +16,5 @@ class MoviesViewModel:ViewModel() {
     fun toggleFavoriteMovie(movieId: String) = _movies.find { it.id == movieId }?.let { movie ->
         movie.isFavorite = !movie.isFavorite
     }
+
 }

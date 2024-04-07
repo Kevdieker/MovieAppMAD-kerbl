@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -76,14 +78,21 @@ fun MovieCard(
                     contentScale = ContentScale.Crop,
                     contentDescription = "Movie image",
                 )
-                Icon(
-                    modifier = Modifier
-                        .padding(12.dp)
-                        .align(Alignment.TopEnd),
-                    tint = Color.White,
-                    imageVector = Icons.Default.Favorite,
-                    contentDescription = "heart"
-                )
+
+                IconButton(
+                    onClick = {
+                        movie.isFavorite = ! movie.isFavorite
+                    }) {
+                    Icon(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .align(Alignment.TopEnd),
+                        tint = if (!movie.isFavorite) Color.White else Color.Red,
+                        imageVector = Icons.Filled.Favorite,
+                        contentDescription = "heart"
+                    )
+                }
+
             }
             Row(
                 modifier = Modifier

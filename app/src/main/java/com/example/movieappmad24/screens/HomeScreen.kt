@@ -20,6 +20,6 @@ fun HomeScreen(navController: NavController,moviesViewModel: MoviesViewModel) {
                 onNavigationIconClick = null
             ) },
             bottomBar = { SimpleBottomAppBar(navController) }
-        ) { innerPadding -> MovieList(navController = navController,list= getMovies(), padding=innerPadding) }
+        ) { innerPadding -> MovieList(navController = navController,list= moviesViewModel.movies, padding=innerPadding) }
     }
 }

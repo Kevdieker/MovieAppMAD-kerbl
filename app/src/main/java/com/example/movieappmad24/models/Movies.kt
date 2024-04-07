@@ -17,6 +17,7 @@ data class Movie(
     val rating: String,
 
     val initialIsFavorite: Boolean = false
+
 ) {
     var isFavorite by mutableStateOf(initialIsFavorite)
 }

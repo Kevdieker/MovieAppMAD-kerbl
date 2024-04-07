@@ -14,14 +14,11 @@ import com.example.movieappmad24.navigation.Screen
 @Composable
 fun MovieList(
     navController: NavController,
-    list: List<Movie> = getMovies(),
+    list: List<Movie>,
     padding: PaddingValues,
-    showOnlyFirstThree: Boolean = false
 ) {
-    val displayList = if (showOnlyFirstThree) list.take(3) else list
-
     LazyColumn(modifier = Modifier.padding(padding)) {
-        items(displayList) { movie ->
+        items(list) { movie ->
             MovieCard(movie = movie) { movieId ->
                 navController.navigate(route = Screen.Detail.route.replace("{movieId}", movieId))
             }
