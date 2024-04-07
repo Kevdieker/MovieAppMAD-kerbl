@@ -16,10 +16,11 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.movieappmad24.widget.MovieCard
 import com.example.movieappmad24.models.getMovies
+import com.example.movieappmad24.viewmodels.MoviesViewModel
 import com.example.movieappmad24.widget.SimpleTopAppBar
 
 @Composable
-fun DetailScreen(navController: NavController, movieId: String?) {
+fun DetailScreen(navController: NavController, movieId: String?,moviesViewModel: MoviesViewModel) {
     val movie = getMovies().find { it.id == movieId }
     Scaffold(
         topBar = {
