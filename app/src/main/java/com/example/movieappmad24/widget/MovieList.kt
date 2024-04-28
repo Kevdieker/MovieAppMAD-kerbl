@@ -10,18 +10,29 @@ import androidx.navigation.NavController
 import com.example.movieappmad24.models.Movie
 import com.example.movieappmad24.models.getMovies
 import com.example.movieappmad24.navigation.Screen
+import com.example.movieappmad24.viewmodels.MoviesViewModel
 
 @Composable
 fun MovieList(
     modifier: Modifier,
     navController: NavController,
-    movies: List<Movie>,
+    viewModel: MoviesViewModel,
+    movies: List<Movie> = getMovies(),
 ) {
     LazyColumn(modifier = modifier) {
         items(movies) { movie ->
-            MovieCard(movie = movie) { movieId ->
-                navController.navigate(route = Screen.Detail.route.replace("{movieId}", movieId))
-            }
+            MovieCard(movie = movie,
+                onFavoriteClick = {
+                    viewModel.toggleFavoriteMovie(movie.id)
+                },
+                onItemClick = { movieId ->
+                    navController.navigate(
+                        route = Screen.Detail.route.replace(
+                            "{movieId}",
+                            movieId
+                        )
+                    )
+                })
         }
     }
 }

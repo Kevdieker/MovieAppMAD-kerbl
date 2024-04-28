@@ -31,7 +31,10 @@ fun DetailScreen(
     ) { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
             movie?.let { movie ->
-                MovieCard(movie)
+                MovieCard(movie = movie,
+                    onFavoriteClick = {
+                        moviesViewModel.toggleFavoriteMovie(movie.id)
+                    })
                 Player("Movie Trailer")
                 Horizontalimageview(movie)
             }

@@ -1,5 +1,6 @@
 package com.example.movieappmad24.widget
 
+import android.util.Log
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -14,10 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -43,6 +41,7 @@ import com.example.movieappmad24.models.Movie
 @Composable
 fun MovieCard(
     movie: Movie,
+    onFavoriteClick: () -> Unit = {},
     onItemClick:(String) -> Unit = {}
 ) {
     var expandedState by remember { mutableStateOf(false) }
@@ -54,7 +53,7 @@ fun MovieCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp)
-            .clickable { onItemClick(movie.id)  }
+            .clickable { onItemClick(movie.id) }
             .animateContentSize(
                 animationSpec = tween(
                     durationMillis = 300,
@@ -79,20 +78,15 @@ fun MovieCard(
                     contentDescription = "Movie image",
                 )
 
-                IconButton(
-                    onClick = {
-                        movie.isFavorite = ! movie.isFavorite
-                    }) {
-                    Icon(
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .align(Alignment.TopEnd),
-                        tint = if (!movie.isFavorite) Color.White else Color.Red,
-                        imageVector = Icons.Filled.Favorite,
-                        contentDescription = "heart"
-                    )
-                }
-
+                FavoriteIcon(
+                    Modifier
+                        .padding(8.dp)
+                        .align(Alignment.TopEnd)
+                        .clickable {
+                        onFavoriteClick()
+                        Log.i("MovieWidget", "icon clicked")
+                    },
+                    isFavorite = movie.isFavorite)
             }
             Row(
                 modifier = Modifier
