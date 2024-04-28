@@ -1,7 +1,7 @@
 package com.example.movieappmad24.widget
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 @Composable
 fun SimpleTopAppBar(
     title: String,
-    navigationIcon: ImageVector? = Icons.Default.ArrowBack,
+    navigationIcon: ImageVector? = Icons.AutoMirrored.Filled.ArrowBack,
     onNavigationIconClick: (() -> Unit)? = null
 ) {
     CenterAlignedTopAppBar(

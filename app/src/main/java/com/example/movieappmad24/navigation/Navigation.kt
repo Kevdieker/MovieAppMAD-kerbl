@@ -27,9 +27,13 @@ fun Navigation() {
 
         composable(route = Screen.Detail.route, arguments = listOf(navArgument(name = "movieId"){type = NavType.StringType}))
         {backStackEntry ->
-            DetailScreen(navController = navController,movieId = backStackEntry.arguments?.getString("movieId"),moviesViewModel = moviesViewModel
+            DetailScreen(
+                navController = navController,
+                movieId = backStackEntry.arguments?.getString("movieId"),
+                moviesViewModel = moviesViewModel
             )
         }
+
         composable(route = Screen.Watchlist.route) {
             WatchlistScreen(navController = navController,moviesViewModel = moviesViewModel)
         }

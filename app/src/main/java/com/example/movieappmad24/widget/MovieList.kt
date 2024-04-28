@@ -13,12 +13,12 @@ import com.example.movieappmad24.navigation.Screen
 
 @Composable
 fun MovieList(
+    modifier: Modifier,
     navController: NavController,
-    list: List<Movie>,
-    padding: PaddingValues,
+    movies: List<Movie>,
 ) {
-    LazyColumn(modifier = Modifier.padding(padding)) {
-        items(list) { movie ->
+    LazyColumn(modifier = modifier) {
+        items(movies) { movie ->
             MovieCard(movie = movie) { movieId ->
                 navController.navigate(route = Screen.Detail.route.replace("{movieId}", movieId))
             }

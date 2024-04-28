@@ -2,6 +2,7 @@ package com.example.movieappmad24.widget
 
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -15,7 +16,6 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.ExoPlayer
@@ -26,7 +26,7 @@ import com.example.movieappmad24.R
 
 @androidx.annotation.OptIn(UnstableApi::class)
 @Composable
-fun Player() {
+fun Player(title:String) {
     var lifecycle by remember {
         mutableStateOf(Lifecycle.Event.ON_CREATE)
     }
@@ -60,7 +60,7 @@ fun Player() {
             lifecycleOwner.lifecycle.removeObserver(observer)
         }
     }
-
+    Text(text = title)
     AndroidView(
         modifier = Modifier
             .fillMaxWidth()
