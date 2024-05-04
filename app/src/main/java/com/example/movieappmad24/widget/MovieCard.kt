@@ -42,7 +42,7 @@ import com.example.movieappmad24.models.Movie
 fun MovieCard(
     movie: Movie,
     onFavoriteClick: () -> Unit = {},
-    onItemClick:(String) -> Unit = {}
+    onItemClick:(Long) -> Unit = {}
 ) {
     var expandedState by remember { mutableStateOf(false) }
     val rotationState by animateFloatAsState(
@@ -70,13 +70,13 @@ fun MovieCard(
                     .fillMaxWidth(),
                 contentAlignment = Alignment.TopEnd
             ) {
-                AsyncImage(
+               /* AsyncImage(
                     model = movie.images.first(),
                     modifier = Modifier
                         .fillMaxSize(),
                     contentScale = ContentScale.Crop,
                     contentDescription = "Movie image",
-                )
+                )*/
 
                 FavoriteIcon(
                     Modifier
