@@ -12,7 +12,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.movieappmad24.data.MovieDatabase
 import com.example.movieappmad24.factories.ViewModelFactory
-import com.example.movieappmad24.repositories.MovieRepository
+import com.example.movieappmad24.data.MovieRepository
 import com.example.movieappmad24.viewmodels.HomeScreenViewModel
 import com.example.movieappmad24.widget.MovieList
 import com.example.movieappmad24.widget.SimpleBottomAppBar
@@ -20,7 +20,8 @@ import com.example.movieappmad24.widget.SimpleTopAppBar
 
 @Composable
 fun HomeScreen(
-    navController: NavController) {
+    navController: NavController
+){
 
  val db = MovieDatabase.getDatabase(LocalContext.current)
  val repository = MovieRepository(movieDao = db.movieDao())

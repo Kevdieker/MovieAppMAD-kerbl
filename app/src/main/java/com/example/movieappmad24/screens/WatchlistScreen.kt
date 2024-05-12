@@ -12,7 +12,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.movieappmad24.data.MovieDatabase
 import com.example.movieappmad24.factories.ViewModelFactory
-import com.example.movieappmad24.repositories.MovieRepository
+import com.example.movieappmad24.data.MovieRepository
 import com.example.movieappmad24.viewmodels.WatchlistViewModel
 import com.example.movieappmad24.widget.MovieList
 import com.example.movieappmad24.widget.SimpleBottomAppBar
@@ -28,7 +28,6 @@ fun WatchlistScreen(
     val viewModel: WatchlistViewModel = viewModel(factory = factory)
 
     val moviesState by viewModel.favMovies.collectAsState()
-
 
     Scaffold(
             topBar = {

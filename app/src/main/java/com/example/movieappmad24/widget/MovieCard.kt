@@ -42,7 +42,7 @@ import com.example.movieappmad24.models.Movie
 fun MovieCard(
     movie: Movie,
     onFavoriteClick: () -> Unit = {},
-    onItemClick:(Long) -> Unit = {}
+    onItemClick:(String) -> Unit = {}
 ) {
     var expandedState by remember { mutableStateOf(false) }
     val rotationState by animateFloatAsState(
@@ -53,7 +53,7 @@ fun MovieCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp)
-            .clickable { onItemClick(movie.id) }
+            .clickable { onItemClick(movie.movieId) }
             .animateContentSize(
                 animationSpec = tween(
                     durationMillis = 300,

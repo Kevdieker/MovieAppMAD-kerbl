@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieappmad24.models.Movie
 import com.example.movieappmad24.models.getMovies
-import com.example.movieappmad24.repositories.MovieRepository
+import com.example.movieappmad24.data.MovieRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,7 +30,7 @@ class HomeScreenViewModel(private val repository: MovieRepository,):ViewModel(),
     private suspend fun addMovie(movie: Movie){
         repository.add(movie)
     }
-    override fun toggleFavoriteMovie(movie: Movie){
+     override fun toggleFavoriteMovie(movie: Movie){
         movie.isFavorite = !movie.isFavorite
 
         viewModelScope.launch {

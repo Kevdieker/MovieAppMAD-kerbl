@@ -3,7 +3,7 @@ package com.example.movieappmad24.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieappmad24.models.Movie
-import com.example.movieappmad24.repositories.MovieRepository
+import com.example.movieappmad24.data.MovieRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,9 +20,10 @@ class WatchlistViewModel(private val repository: MovieRepository,): ViewModel(),
             }
         }
     }
-    override fun toggleFavoriteMovie(movie: Movie){
-        movie.isFavorite = !movie.isFavorite
 
+
+     override fun toggleFavoriteMovie(movie: Movie) {
+        movie.isFavorite = !movie.isFavorite
         viewModelScope.launch {
             repository.update(movie)
         }

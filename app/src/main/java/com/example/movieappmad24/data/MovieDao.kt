@@ -17,12 +17,14 @@ interface MovieDao {
     suspend fun update(movie: Movie)
     @Delete
     suspend fun delete(movie: Movie)
+
+    @Query("SELECT * FROM movie WHERE movie.movieId = :movieId")
+    suspend fun getMovieByID(movieId: String?): Movie
     @Query("SELECT * FROM movie")
     fun readAll(): Flow<List<Movie>>
-    @Query("SELECT * FROM movie where isFavorite = 1")
+    @Query("SELECT * FROM movie WHERE isFavorite = 1")
     fun readAllFavorites(): Flow<List<Movie>>
 
-    @Query("SELECT * FROM movie where id = :movieId")
-    fun getMovieByID(movieId: Long?): Movie
+
 
 }

@@ -8,7 +8,7 @@ import com.example.movieappmad24.models.Movie
 
 @Database(
     entities = [Movie::class],
-    version = 2,
+    version = 4,
     exportSchema = false,
 )
 abstract class MovieDatabase : RoomDatabase() {
