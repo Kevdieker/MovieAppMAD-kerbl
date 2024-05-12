@@ -7,6 +7,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.movieappmad24.models.Movie
+import com.example.movieappmad24.models.MovieWithImages
 import com.example.movieappmad24.navigation.Screen
 import com.example.movieappmad24.viewmodels.MovieViewModel
 import kotlinx.coroutines.launch
@@ -16,7 +17,7 @@ fun MovieList(
     modifier: Modifier,
     navController: NavController,
     viewModel: MovieViewModel,
-    movies: List<Movie>,
+    movies: List<MovieWithImages>,
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -24,8 +25,8 @@ fun MovieList(
         items(movies) { movie ->
             MovieCard(movie = movie,
                 onFavoriteClick = {
-                    coroutineScope.launch(){
-                        viewModel.toggleFavoriteMovie(movie)
+                    coroutineScope.launch{
+                        viewModel.toggleFavoriteMovie(movie.movie)
                     }
 
                 },

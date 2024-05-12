@@ -44,11 +44,15 @@ data class Movie(
         director,
         actors,
         plot,
-        listOf("default_image_url"),
+        mutableListOf<String>(),
         trailer,
         rating,
         isFavorite
     )
+
+    override fun equals(other: Any?): Boolean {
+        return super.equals(other)
+    }
 }
 fun getMovies(): List<Movie> {
     return listOf(

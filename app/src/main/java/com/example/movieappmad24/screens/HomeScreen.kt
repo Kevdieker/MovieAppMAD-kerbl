@@ -27,7 +27,6 @@ fun HomeScreen(
  val repository = MovieRepository(movieDao = db.movieDao())
  val factory = ViewModelFactory(repository = repository)
  val viewModel: HomeScreenViewModel = viewModel(factory = factory)
-
     val moviesState by viewModel.movies.collectAsState()
 
     Scaffold(

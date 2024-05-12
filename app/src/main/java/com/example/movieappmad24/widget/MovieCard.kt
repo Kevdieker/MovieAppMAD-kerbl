@@ -37,10 +37,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.movieappmad24.models.Movie
+import com.example.movieappmad24.models.MovieWithImages
 
 @Composable
 fun MovieCard(
-    movie: Movie,
+    movie: MovieWithImages,
     onFavoriteClick: () -> Unit = {},
     onItemClick:(String) -> Unit = {}
 ) {
@@ -53,7 +54,7 @@ fun MovieCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp)
-            .clickable { onItemClick(movie.movieId) }
+            .clickable { onItemClick(movie.movie.movieId) }
             .animateContentSize(
                 animationSpec = tween(
                     durationMillis = 300,
@@ -70,13 +71,13 @@ fun MovieCard(
                     .fillMaxWidth(),
                 contentAlignment = Alignment.TopEnd
             ) {
-               /* AsyncImage(
-                    model = movie.images.first(),
+                AsyncImage(
+                    model = movie.movieImages.first().url,
                     modifier = Modifier
                         .fillMaxSize(),
                     contentScale = ContentScale.Crop,
                     contentDescription = "Movie image",
-                )*/
+                )
 
                 FavoriteIcon(
                     Modifier
@@ -86,7 +87,7 @@ fun MovieCard(
                         onFavoriteClick()
                         Log.i("MovieWidget", "icon clicked")
                     },
-                    isFavorite = movie.isFavorite)
+                    isFavorite = movie.movie.isFavorite)
             }
             Row(
                 modifier = Modifier
@@ -96,7 +97,7 @@ fun MovieCard(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = movie.title,
+                    text = movie.movie.title,
                     fontSize = 18.sp,
                 )
 
@@ -120,18 +121,18 @@ fun MovieCard(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Director: ${movie.director}\n" +
-                                "Released: ${movie.year}\n" +
-                                "Genre: ${movie.genre}\n" +
-                                "Actors: ${movie.actors}\n" +
-                                "Rating: ${movie.rating}"
+                        text = "Director: ${movie.movie.director}\n" +
+                                "Released: ${movie.movie.year}\n" +
+                                "Genre: ${movie.movie.genre}\n" +
+                                "Actors: ${movie.movie.actors}\n" +
+                                "Rating: ${movie.movie.rating}"
                     )
                     Divider(
                         thickness = 4.dp,
                         modifier = Modifier.padding(vertical = 4.dp)
                     )
                     Text(
-                        text = "Plot: ${movie.plot}\n"
+                        text = "Plot: ${movie.movie.plot}\n"
                     )
                 }
             }
